@@ -13,18 +13,22 @@ export const fetchBooks = createAsyncThunk(FETCH_BOOKS,
   });
 // add book to api
 export const addBook = createAsyncThunk(ADD_BOOK,
-  async (bookdetails) => {
-    const response = await postBook(bookdetails);
-    await fetchBooks();
-    return response;
+  async (bookdetails, thunkAPI) => {
+    await postBook(bookdetails);
+    thunkAPI.dispatch(fetchBooks());
+    const books = thunkAPI.getState().booksList;
+    return books;
   });
 
 // remove book from the api
 export const removeBook = createAsyncThunk(REMOVE_BOOK,
-  async (bookId) => {
-    const response = await deleteBook(bookId);
-    await fetchBooks();
-    return response;
+  async (bookId, thunkAPI) => {
+    await deleteBook(bookId);
+    thunkAPI.dispatch(fetchBooks());
+    // await fetchBooks();
+
+    const books = thunkAPI.getState().booksList;
+    return books;
   });
 
 const slice = createSlice({

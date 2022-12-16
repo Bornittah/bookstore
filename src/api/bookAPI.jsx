@@ -1,33 +1,6 @@
 const API_URL = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi';
-export const appId = async () => {
-  const response = await fetch(`${API_URL}/apps/`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-  const id = response.text().then((data) => {
-    if (response.status === 201) {
-      const key = localStorage.getItem('book-store');
-      if (key === null) {
-        localStorage.setItem('book-store', data);
-        const newKey = localStorage.getItem('book-store');
-        return newKey;
-      }
-      return key;
-    }
-    return data;
-  })
-    .catch((err) => err);
-  return id;
-};
 
-window.onload = () => {
-  appId();
-};
-// App ID
-const id = localStorage.getItem('book-store');
+const id = 'npr8AJRrxMvciS8Udo1J';
 
 export const getBooks = async () => {
   const response = await fetch(`${API_URL}/apps/${id}/books`,
@@ -38,36 +11,35 @@ export const getBooks = async () => {
       },
     });
   const bookList = [];
-  const books = await response.json().then((data) => data);
-  console.log(books);
-  // const books = await response.json().then((data) => data)
-  //   .catch((err) => { console.log('Error', err); });
+  const books = await response.json();
   Object.keys(books).forEach((book) => {
-    books[book][0].id = book;
+    books[book][0].itemId = book;
     bookList.push(books[book][0]);
   });
   return bookList;
 };
 
-export const postBook = async (bookdetails) => {
+export const postBook = async (details) => {
   const response = await fetch(`${API_URL}/apps/${id}/books`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(bookdetails),
+      body: JSON.stringify(details),
     });
-  const book = await response.json().then((data) => data).catch((err) => { console.log('Error', err); });
-  return book;
+  await response.text();
+  const bookdetails = { ...details, itemId: details.item_id };
+  delete bookdetails.item_id;
+  return bookdetails;
 };
 
-export const deleteBook = async (bookId) => {
-  const response = await fetch(`${API_URL}/apps/${id}/books/${bookId}`,
+export const deleteBook = async (itemId) => {
+  const response = await fetch(`${API_URL}/apps/${id}/books/${itemId}`,
     {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
       },
     });
-  await response.json();
-  return bookId;
+  await response.text();
+  return itemId;
 };

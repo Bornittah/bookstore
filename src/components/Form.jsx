@@ -43,15 +43,16 @@ const Form = () => {
           value="Add book"
           onClick={(e) => {
             e.preventDefault();
-            dispatch(addBook(state));
             setState({
               item_id: uniqid(),
               title: '',
               author: '',
               category: '',
             });
-            dispatch(fetchBooks());
-            // e.target.reset();
+            if (state.title !== '' && state.author !== '') {
+              dispatch(addBook(state));
+              dispatch(fetchBooks());
+            }
           }}
         />
       </form>
