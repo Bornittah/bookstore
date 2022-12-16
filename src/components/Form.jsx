@@ -15,6 +15,12 @@ const Form = () => {
     category: '',
   });
 
+  const [style, setStyle] = useState('error_msg');
+
+  const changeStyle = () => {
+    setStyle('show_error_msg');
+  };
+
   const handleChanges = (e) => {
     setState({
       ...state, [e.target.name]: e.target.value,
@@ -30,7 +36,9 @@ const Form = () => {
       <h2>Add new book</h2>
       <form>
         <input type="text" value={state.title} name="title" onChange={handleChanges} placeholder="Book title" />
+        <span className={style}>Please enter title</span>
         <input type="text" value={state.author} name="author" onChange={handleChanges} placeholder="Book author" />
+        <span className={style}>Please enter author</span>
         <select required value={state.category} name="category" onChange={handleChanges}>
           <option value="Action">Action</option>
           <option value="Fiction">Fiction</option>
@@ -52,6 +60,8 @@ const Form = () => {
             if (state.title !== '' && state.author !== '') {
               dispatch(addBook(state));
               dispatch(fetchBooks());
+            } else {
+              changeStyle();
             }
           }}
         />
