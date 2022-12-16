@@ -41,3 +41,12 @@ main {
   color: inherit;
   font-size: 1.2rem;
 }
+
+.error_msg {
+  display: none;
+}
+
+.show_error_msg {
+  color: #fe5512;
+  display: block;
+}
