@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FaUser } from 'react-icons/fa';
 
 const NavBar = () => (
-  <header>
+  <header className="header">
     <nav className="flex space-btn">
-      <ul className="navbar flex space-btn">
+      <ul className="navbar flex space-btn justify-center align-center">
         <li className="nav-link">
           <Link to="/">BookStore CMS</Link>
         </li>
@@ -15,8 +16,9 @@ const NavBar = () => (
           <Link to="/categories">CATEGORIES</Link>
         </li>
       </ul>
-      <div>
-        <Link to="/">Profile</Link>
+      <div className="profile">
+        <i className="fa fa-user icon" aria-hidden="true" />
+        <FaUser className="icon" />
       </div>
     </nav>
   </header>
