@@ -6,7 +6,7 @@ const NavBar = () => (
   <header className="header">
     <nav className="flex space-btn">
       <ul className="navbar flex space-btn justify-center align-center">
-        <li className="nav-link">
+        <li className="nav-link logo">
           <Link to="/">BookStore CMS</Link>
         </li>
         <li className="nav-link">
@@ -16,10 +16,9 @@ const NavBar = () => (
           <Link to="/categories">CATEGORIES</Link>
         </li>
       </ul>
-      <div className="profile">
-        <i className="fa fa-user icon" aria-hidden="true" />
+      <button className="profile" type="button">
         <FaUser className="icon" />
-      </div>
+      </button>
     </nav>
   </header>
 );
