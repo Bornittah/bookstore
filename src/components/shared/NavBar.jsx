@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FaUser } from 'react-icons/fa';
 
 const NavBar = () => (
-  <header>
+  <header className="header">
     <nav className="flex space-btn">
-      <ul className="navbar flex space-btn">
-        <li className="nav-link">
+      <ul className="navbar flex space-btn justify-center align-center">
+        <li className="nav-link logo">
           <Link to="/">BookStore CMS</Link>
         </li>
         <li className="nav-link">
@@ -15,9 +16,9 @@ const NavBar = () => (
           <Link to="/categories">CATEGORIES</Link>
         </li>
       </ul>
-      <div>
-        <Link to="/">Profile</Link>
-      </div>
+      <button className="profile" type="button">
+        <FaUser className="icon" />
+      </button>
     </nav>
   </header>
 );
