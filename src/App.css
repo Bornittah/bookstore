@@ -81,8 +81,7 @@
   color: #0290ff;
 }
 
-.nav-link a:is(:focus, :active)
-{
+.nav-link a:is(:focus, :active) {
   border-bottom: 1px solid #0290ff;
   color: #0290ff;
 }
